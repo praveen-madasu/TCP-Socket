@@ -26,7 +26,7 @@ struct addinfo* getHostInfo(char* host, char* port)
 	return getaddinfo_res;
 }
 
-int eastablishConnection(struct addrinfo *info)
+int establishConnection(struct addrinfo *info)
 {
 	if(info == NULL)
 		return -1;
@@ -36,14 +36,14 @@ int eastablishConnection(struct addrinfo *info)
 	{
 		if((clientfd = socket(info->ai_family, info->ai_socktype, info->ai_protocol)) < 0)
 		{
-			perror("Error in eastablishing connection socket\n");
+			perror("Error in establishing connection socket\n");
 			continue;
 		}
 
 		if(connect(clientfd, info->ai_addr, info->ai_addrlen) < 0)
 		{
 			close(clientfd);
-			perror("Error in eastablishing connection::connect\n");
+			perror("Error in establishing connection::connect\n");
 			continue;
 		}
 
@@ -80,10 +80,10 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	clientfd = eastablishConnection(getHostInfo(argv[1], argv[2]));
+	clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
 	if(clientfd == -1)
 	{
-		fprintf(stderr, "failed to connect to: %s %s %s\n", argv[1], argv[2], argv[3]);
+		fprintf(stderr, "main:failed to establish connection\n");
 		return 3;
 	}
 
