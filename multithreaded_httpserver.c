@@ -157,7 +157,7 @@ int main(int argc, char** argv)
 	int server = bindListener(getAddrInfo(argv[1]));
 	if(server < 0)
 	{
-		fprintf(stderr, "bindListener failed to bind at port %s\n", argv[1]);
+		fprintf(stderr, "bindListener failed at port %s\n", argv[1]);
 		return 2;
 	}
 	
